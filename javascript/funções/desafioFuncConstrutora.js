@@ -1,5 +1,5 @@
-function Pessoa(nome){
-    this.falar = () =>{
+function Pessoa(nome) {
+    this.falar = () => {
         console.log(`meu nome é ${nome}`)
     }
 }
