@@ -1,3 +1,4 @@
+/// es6 sintaxe
 class PersonClass{
     constructor(name){
         this.name = name
@@ -8,7 +9,7 @@ class PersonClass{
 }
 p1 = new PersonClass('Leandro')
 p1.speak()
-///
+/// caindo em desuso
 function PersonConstructor(name) {
     this.speak = () => {
         console.log(`My name is ${name}`)
@@ -16,7 +17,7 @@ function PersonConstructor(name) {
 }
 const p2 = new PersonConstructor('Tainá')
 p2.speak()
-///
+/// re
 const PersonFactory = name =>{
     return{
         speak: () => console.log(`My name is ${name}`)
