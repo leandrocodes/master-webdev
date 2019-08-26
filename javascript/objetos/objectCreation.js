@@ -32,3 +32,7 @@ function criarFuncionario(nome, salarioBase, faltas){
 const f1 = criarFuncionario('Leandro', 400, 3)
 const f2 = criarFuncionario('Jonatan', 14000, 6)
 console.log(f1.getSalario(), f2.getSalario())
+
+
+const fromJSON = JSON.parse('{"info": "Sou um JSON"}')
+console.log(fromJSON.info)
