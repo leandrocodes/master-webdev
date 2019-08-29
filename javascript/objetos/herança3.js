@@ -13,4 +13,7 @@ const filha2 = Object.create(pai, {
 console.log(filha2.nome)
 //não vai mudar
 filha2.nome = 'Carla'
-console.log(filha2.nome)
+console.log(`${filha2.nome} tem cabelo ${filha2.corCabelo}`)
+
+console.log(Object.keys(filha1))
+console.log(Object.keys(filha2))
