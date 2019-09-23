@@ -28,5 +28,5 @@ aprovados.sort()
 console.table(aprovados)
 // versus
 aprovados = ['Bia', 'Carlos', 'Ana']
-aprovados.splice(1, 1)
+aprovados.splice(1, 1, 'Leandro')
 console.table(aprovados)
