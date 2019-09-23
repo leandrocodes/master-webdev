@@ -21,3 +21,8 @@ aprovados.sort()
 console.log(aprovados)
 console.table(aprovados)
 console.log(aprovados.length)
+
+delete aprovados[1]
+console.table(aprovados)
+aprovados.sort()
+console.table(aprovados)
