@@ -26,3 +26,7 @@ delete aprovados[1]
 console.table(aprovados)
 aprovados.sort()
 console.table(aprovados)
+// versus
+aprovados = ['Bia', 'Carlos', 'Ana']
+aprovados.splice(1, 1)
+console.table(aprovados)
