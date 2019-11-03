@@ -4,6 +4,14 @@ const products = [
   {nome: 'Papel Sulfite', preco: 15, fragil: false},
 ]
 
-console.log(products.filter( p => {
+const frageis = p => p.frageis != false
+const caros = p => p.preco > 2500
+
+console.table(products.filter( p => {
   return (p.preco > 2500)
 }))
+console.log(`////`)
+
+console.table(products.filter(frageis))
+console.log(`////`)
+console.table(products.filter(caros))
