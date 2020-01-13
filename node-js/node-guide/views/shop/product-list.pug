@@ -15,10 +15,10 @@ block content
             header.card__header
               h1.product__title #{product.title}
             .card__image
-              img(src="https://cdn.pixabay.com/photo/2016/03/31/20/51/book-1296045_960_720.png" alt="A Book")
+              img(src=(product.imgUrl) alt="A Book")
             .card__content
-              h2.product__price $19.00
-              p.product__description Lorem ipsum dolor sit amet.
+              h2.product__price #{product.price}
+              p.product__description #{product.desc}
             .card__actions
               button.btn Add to Cart
     else

@@ -6,7 +6,12 @@ exports.getAddProduct = (req, res, next) => {
 }
 
 exports.postAddProduct = (req, res, next) => {
-  const product = new Product(req.body.title)
+  const dt = req.body
+  const title = dt.title
+  const desc = dt.desc
+  const imgUrl = dt.imgUrl
+  const price = dt.price
+  const product = new Product(title, imgUrl, desc, price)
   product.save()
   res.redirect('/products')
 }
