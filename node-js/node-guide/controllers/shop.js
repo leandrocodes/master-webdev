@@ -9,7 +9,10 @@ exports.getProductsShop = (req, res, next) => {
 }
 
 exports.getIndexShop = (req, res, next) => {
-  res.render('shop/index', { path: '/' })
+  Product.fetchAll((products) => {
+    res.render('shop/index', { prods: products, path: '/' })
+    console.log(products)
+  })
 }
 
 exports.getCartShop = (req, res, next) => {
