@@ -10,4 +10,7 @@ router.get('/add-product', productsController.getAddProduct)
 // /admin/add-product => POST
 router.post('/add-product', productsController.postAddProduct)
 
+// /admin/products => GET
+router.get('/products', productsController.getAdmProducts)
+
 module.exports = router
