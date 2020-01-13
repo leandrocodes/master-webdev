@@ -1,4 +1,4 @@
-const Product = require('../model/product')
+const Product = require('../models/product')
 
 //shop
 exports.getProductsShop = (req, res, next) => {
