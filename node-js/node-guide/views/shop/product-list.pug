@@ -15,7 +15,7 @@ block content
             header.card__header
               h1.product__title #{product.title}
             .card__image
-              img(src=(product.imgUrl) alt="A Book")
+              img(src=(product.imgUrl) alt=(product.title))
             .card__content
               h2.product__price #{product.price}
               p.product__description #{product.desc}
