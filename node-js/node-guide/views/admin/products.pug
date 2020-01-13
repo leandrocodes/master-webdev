@@ -20,6 +20,8 @@ block content
               h2.product__price #{product.price}
               p.product__description #{product.desc}
             .card__actions
-              button.btn Add to Cart
+              a.btn(href="/admin/edit-product") Edit
+              form(action="/admin/delete-product", method="post")
+                button.btn(type="submit") Delete
     else
       h1 No products yet!
