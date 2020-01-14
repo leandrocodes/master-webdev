@@ -18,6 +18,11 @@ exports.getIndexShop = (req, res, next) => {
 exports.getCartShop = (req, res, next) => {
   res.render('shop/cart', { path: '/cart' })
 }
+
 exports.getCheckoutShop = (req, res, next) => {
   res.render('shop/checkout', { path: '/checkout' })
+}
+
+exports.getOrdersShop = (req, res, next) => {
+  res.render('shop/orders', { path: '/orders' })
 }
