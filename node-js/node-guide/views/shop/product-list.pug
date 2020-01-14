@@ -20,6 +20,7 @@ block content
               h2.product__price #{product.price}
               p.product__description #{product.desc}
             .card__actions
+              a.btn(href='/products/' + product.id) Details
               form(action="/cart", method="post")
                 button.btn(type="submit") Add to Cart
     else
