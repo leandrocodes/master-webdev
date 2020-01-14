@@ -4,14 +4,20 @@ const Product = require('../models/product')
 exports.getProductsShop = (req, res, next) => {
   Product.fetchAll((products) => {
     res.render('shop/product-list', { prods: products, path: '/products' })
-    console.log(products)
   })
+}
+
+exports.getProductById = (req, res, next) => {
+  const prodId = req.params.productId
+  Product.findById(prodId, product => {
+    console.log(product)
+  })
+  res.redirect('/')
 }
 
 exports.getIndexShop = (req, res, next) => {
   Product.fetchAll((products) => {
     res.render('shop/index', { prods: products, path: '/' })
-    console.log(products)
   })
 }
 
