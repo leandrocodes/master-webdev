@@ -1,7 +1,7 @@
 extends ../layouts/main-layout.pug
 
 block title
-  title Product List
+  title #{product.title}
 
 block styles
   link(rel="stylesheet", href="/css/product.css")
@@ -14,3 +14,6 @@ block content
       img(src=(product.imgUrl) alt=(product.title))
     h2 $ #{product.price}
     p #{product.desc}
+    form(action="/cart", method="post")
+      button.btn(type="submit") Add to Cart
+      input(type="hidden", name="productId" value=(product.id))

@@ -17,9 +17,11 @@ block content
             .card__image
               img(src=(product.imgUrl) alt=(product.title))
             .card__content
-              h2.product__price #{product.price}
+              h2.product__price $ #{product.price}
               p.product__description #{product.desc}
             .card__actions
-              button.btn Add to Cart
+              a.btn(href='/products/' + product.id) Details
+              form(action="/cart", method="post")
+                button.btn(type="submit") Add to Cart
     else
       h1 No products yet!
