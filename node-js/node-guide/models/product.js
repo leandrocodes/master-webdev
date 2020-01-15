@@ -25,7 +25,7 @@ module.exports = class Product {
     this.title = title
     this.imgUrl = imgUrl
     this.desc = desc
-    this.price = price
+    this.price = parseFloat(price)
   }
 
   save() {
