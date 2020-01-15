@@ -16,15 +16,28 @@ exports.getEditProduct = (req, res, next) => {
   })
 }
 
+exports.postEditProduct = (req, res, next) => {
+  const dt = req.body
+  const updtTitle = dt.title
+  const updtDesc = dt.desc
+  const updtImgUrl = dt.imgUrl
+  const updtPrice = dt.price
+  const id = dt.prodId
+  const product = new Product(id, updtTitle, updtImgUrl, updtDesc, updtPrice)
+  product.save()
+  res.redirect('/admin/products')
+}
+
+
 exports.postAddProduct = (req, res, next) => {
   const dt = req.body
   const title = dt.title
   const desc = dt.desc
   const imgUrl = dt.imgUrl
   const price = dt.price
-  const product = new Product(title, imgUrl, desc, price)
+  const product = new Product(null, title, imgUrl, desc, price)
   product.save()
-  res.redirect('/products')
+  res.redirect('/admin/products')
 }
 
 exports.getListProducts = (req, res, next) => {

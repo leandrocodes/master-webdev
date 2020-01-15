@@ -28,7 +28,8 @@ block content
         .form-control
           label(for="desc") Description
           textarea(name="desc", cols="42", rows="5", id="desc")
-      else 
+      else
+        input(type="hidden", name="prodId", id="id", value=product.id)
         .form-control
           label(for="title") Title
           input(type="text", name="title", id="title", value=product.title)
