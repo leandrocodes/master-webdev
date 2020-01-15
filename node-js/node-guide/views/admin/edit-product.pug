@@ -15,18 +15,32 @@ block content
     else
       - action = 'add-product'
     form.product-form(action=("/admin/"+action) method="post")
-      .form-control
-        label(for="title") Title
-        input(type="text", name="title", id="title")
-      .form-control
-        label(for="imgUrl") Image URL
-        input(type="text", name="imgUrl", id="imgUrl")
-      .form-control
-        label(for="price") Price
-        input(type="number", step="0.1", name="price", id="price")
-      .form-control
-        label(for="desc") Description
-        textarea(name="desc", cols="42", rows="5", id="desc")
+      if (!product)
+        .form-control
+          label(for="title") Title
+          input(type="text", name="title", id="title")
+        .form-control
+          label(for="imgUrl") Image URL
+          input(type="text", name="imgUrl", id="imgUrl")
+        .form-control
+          label(for="price") Price
+          input(type="number", step="0.1", name="price", id="price")
+        .form-control
+          label(for="desc") Description
+          textarea(name="desc", cols="42", rows="5", id="desc")
+      else 
+        .form-control
+          label(for="title") Title
+          input(type="text", name="title", id="title", value=product.title)
+        .form-control
+          label(for="imgUrl") Image URL
+          input(type="text", name="imgUrl", id="imgUrl", value=product.imgUrl)
+        .form-control
+          label(for="price") Price
+          input(type="number", step="0.1", name="price", id="price", value=product.price)
+        .form-control
+          label(for="desc") Description
+          textarea(name="desc", cols="42", rows="5", id="desc") #{product.desc}
       button.btn(type="submit") 
         if(editing)
           | Edit Product 
