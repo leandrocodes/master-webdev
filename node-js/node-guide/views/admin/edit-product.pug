@@ -24,7 +24,7 @@ block content
           input(type="text", name="imgUrl", id="imgUrl")
         .form-control
           label(for="price") Price
-          input(type="number", step="0.1", name="price", id="price")
+          input(type="number", step="0.01", name="price", id="price")
         .form-control
           label(for="desc") Description
           textarea(name="desc", cols="42", rows="5", id="desc")
@@ -38,7 +38,7 @@ block content
           input(type="text", name="imgUrl", id="imgUrl", value=product.imgUrl)
         .form-control
           label(for="price") Price
-          input(type="number", step="0.1", name="price", id="price", value=product.price)
+          input(type="number", step="0.01", name="price", id="price", value=product.price)
         .form-control
           label(for="desc") Description
           textarea(name="desc", cols="42", rows="5", id="desc") #{product.desc}

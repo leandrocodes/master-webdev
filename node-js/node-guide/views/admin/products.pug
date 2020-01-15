@@ -17,7 +17,7 @@ block content
             .card__image
               img(src=(product.imgUrl) alt=(product.title))
             .card__content
-              h2.product__price #{product.price}
+              h2.product__price $ #{product.price}
               p.product__description #{product.desc}
             .card__actions
               a.btn(href="/admin/edit-product/"+product.id+'?edit=true') Edit
