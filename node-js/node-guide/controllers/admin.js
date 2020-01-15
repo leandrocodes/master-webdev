@@ -6,10 +6,13 @@ exports.getAddProduct = (req, res, next) => {
 }
 
 exports.getEditProduct = (req, res, next) => {
+  const editMode = req.query.edit
+  if(!editMode) return res.redirect('/')
+
   const prodId = req.params.productId
   Product.findById(prodId, product => {
     if(!product) return res.redirect('/')
-    res.render('admin/edit-product', {path: '/admin/products', editing: true, product})
+    res.render('admin/edit-product', {path: '/admin/products', edit: editMode, product})
   })
 }
 
