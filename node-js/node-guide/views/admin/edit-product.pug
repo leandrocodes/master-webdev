@@ -10,7 +10,7 @@ block styles
 block content
   main
     - var action = ''
-    if(editing)
+    if(edit)
       - action = 'edit-product'
     else
       - action = 'add-product'
@@ -42,7 +42,7 @@ block content
           label(for="desc") Description
           textarea(name="desc", cols="42", rows="5", id="desc") #{product.desc}
       button.btn(type="submit") 
-        if(editing)
+        if(edit)
           | Edit Product 
         else
           | Add Product
