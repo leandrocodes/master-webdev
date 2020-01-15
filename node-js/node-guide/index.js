@@ -1,4 +1,3 @@
-// TODO: PEGAR OS ARQUIVOS ARRUMADOS NA PROX AULA
 const path = require('path')
 const http = require('http')
 //

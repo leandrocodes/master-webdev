@@ -21,6 +21,7 @@ block content
               p.product__description #{product.desc}
             .card__actions
               a.btn(href='/products/' + product.id) Details
+              //- TODO: VER ALGUMA FORMA DE TRANSFORMAR ISSO NUM COMPONENTE OU INCLUDE
               form(action="/cart", method="post")
                 button.btn(type="submit") Add to Cart
                 input(type="hidden", name="productId" value=(product.id))
