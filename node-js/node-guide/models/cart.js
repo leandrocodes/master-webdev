@@ -6,6 +6,7 @@ const p = path.join(path.dirname(process.mainModule.filename), 'data', 'cart.jso
 module.exports = class Cart {
   static addProduct(id, productPrice) {
     // Fetch the previous cart
+    this.productPrice = parseFloat(productPrice)
     fs.readFile(p, (err, data) => {
       let cart
       if (!err) {
@@ -31,8 +32,9 @@ module.exports = class Cart {
         updatedProduct = { id: id, qty: 1 }
         cart.products = [...cart.products, updatedProduct]
       }
-      cart.totalPrice += productPrice
+      cart.totalPrice = cart.totalPrice + this.productPrice
       fs.writeFile(p, JSON.stringify(cart), (err) => console.log(err))
+      console.log(cart)
     })
   }
 }
