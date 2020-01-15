@@ -7,12 +7,12 @@ exports.getAddProduct = (req, res, next) => {
 
 exports.getEditProduct = (req, res, next) => {
   const edit = req.query.edit
-  if(!edit) return res.redirect('/')
+  if (!edit) return res.redirect('/')
 
   const prodId = req.params.productId
   Product.findById(prodId, product => {
-    if(!product) return res.redirect('/')
-    res.render('admin/edit-product', {path: '/admin/products', edit, product})
+    if (!product) return res.redirect('/')
+    res.render('admin/edit-product', { path: '/admin/products', edit, product })
   })
 }
 
@@ -25,6 +25,12 @@ exports.postEditProduct = (req, res, next) => {
   const id = dt.prodId
   const product = new Product(id, updtTitle, updtImgUrl, updtDesc, updtPrice)
   product.save()
+  res.redirect('/admin/products')
+}
+
+exports.postDelProduct = (req, res, next) => {
+  const prodId = req.body.productId
+  Product.deleteById(prodId)
   res.redirect('/admin/products')
 }
 
@@ -43,6 +49,5 @@ exports.postAddProduct = (req, res, next) => {
 exports.getListProducts = (req, res, next) => {
   Product.fetchAll((products) => {
     res.render('admin/products', { prods: products, path: '/admin/products', editing: true })
-    console.log(products)
   })
 }
