@@ -2,7 +2,15 @@ const Product = require('../models/product')
 
 //admin
 exports.getAddProduct = (req, res, next) => {
-  res.render('admin/add-product', { path: '/admin/add-product' })
+  res.render('admin/edit-product', { path: '/admin/add-product' })
+}
+
+exports.getEditProduct = (req, res, next) => {
+  const prodId = req.params.productId
+  Product.findById(prodId, product => {
+    if(!product) return res.redirect('/')
+    res.render('admin/edit-product', {path: '/admin/products', editing: true, product})
+  })
 }
 
 exports.postAddProduct = (req, res, next) => {
@@ -18,7 +26,7 @@ exports.postAddProduct = (req, res, next) => {
 
 exports.getListProducts = (req, res, next) => {
   Product.fetchAll((products) => {
-    res.render('admin/products', { prods: products, path: '/admin/products' })
+    res.render('admin/products', { prods: products, path: '/admin/products', editing: true })
     console.log(products)
   })
 }
