@@ -92,7 +92,6 @@ module.exports = class Cart {
         cart = { products: [], totalPrice: 0 }
       }
       cb(cart)
-
     })
   }
 

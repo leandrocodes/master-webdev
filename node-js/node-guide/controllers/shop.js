@@ -24,13 +24,14 @@ exports.getCartShop = (req, res, next) => {
   Cart.getCart(cart => {
     Product.fetchAll(products => {
       const cartProducts = []
+      const totalPrice = cart.totalPrice
       for (product of products) {
         const productData = cart.products.find(prod => prod.id === product.id)
         if (productData) {
-          cartProducts.push({ productData: product, qty: productData.qty })
+          cartProducts.push({ productData: product, qty: productData.qty})
         }
       }
-      res.render('shop/cart', { path: '/cart', products: cartProducts })
+      res.render('shop/cart', { path: '/cart', products: cartProducts, totalPrice })
       console.log(cartProducts)
     })
   })

@@ -17,6 +17,7 @@ block content
                 form(action="/cart-delete-item" method="post")
                   input(type="hidden", name="productId", value=item.productData.id)
                   button.btn(type="submit") Delete
+            p Total Price: $ #{totalPrice}
 
     else
       h1 No products yet!
