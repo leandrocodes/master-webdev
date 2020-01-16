@@ -4,6 +4,19 @@ block title
   title Cart
 
 block styles
+  link(rel="stylesheet", href="/css/product.css")
 
 block content
-  h1 Nothing there...
+  main
+    if (products.length > 0)
+      .grid
+          ul
+            each item in products
+              li 
+                p #{item.productData.title} (x#{item.qty})
+                form(action="/cart-delete-item" method="post")
+                  input(type="hidden", name="productId", value=item.productData.id)
+                  button.btn(type="submit") Delete
+
+    else
+      h1 No products yet!
