@@ -3,6 +3,8 @@ const path = require('path')
 
 const p = path.join(path.dirname(process.mainModule.filename), 'data', 'cart.json')
 
+
+//TODO: USAR ESSA FUNÇÃO AQUI!!
 const getCartFromFile = (cb) => {
   fs.readFile(p, (err, data) => {
     let cart
