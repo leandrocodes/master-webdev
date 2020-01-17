@@ -6,10 +6,14 @@ const bodyParser = require('body-parser')
 //
 const adminRoutes = require('./routes/admin')
 const shopRoutes = require('./routes/shop')
-//
 const errorController = require('./controllers/error')
+const db = require('./util/db')
 
 const app = express()
+
+db.execute('select * from products')
+  .then(result => console.log(result[0], result[1]))
+  .catch(err => console.log(err))
 
 app.set('view engine', 'pug')
 app.set('views', 'views')
