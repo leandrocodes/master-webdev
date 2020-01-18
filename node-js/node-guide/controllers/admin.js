@@ -16,6 +16,22 @@ exports.getEditProduct = (req, res, next) => {
   })
 }
 
+exports.postAddProduct = (req, res, next) => {
+  const dt = req.body
+  const title = dt.title
+  const desc = dt.desc
+  const imgUrl = dt.imgUrl
+  const price = dt.price
+  Product.create({
+    title,
+    price,
+    imgUrl,
+    desc
+  })
+    .then(data => console.log(data))
+    .catch(err => console.log(err))
+}
+
 exports.postEditProduct = (req, res, next) => {
   const dt = req.body
   const updtTitle = dt.title
@@ -32,19 +48,6 @@ exports.postDelProduct = (req, res, next) => {
   const prodId = req.body.productId
   Product.deleteById(prodId)
   res.redirect('/admin/products')
-}
-
-exports.postAddProduct = (req, res, next) => {
-  const dt = req.body
-  const title = dt.title
-  const desc = dt.desc
-  const imgUrl = dt.imgUrl
-  const price = dt.price
-  const product = new Product(null, title, imgUrl, desc, price)
-  product
-    .save()
-    .then(() => res.redirect('/'))
-    .catch(err => console.log(err))
 }
 
 exports.getListProducts = (req, res, next) => {
