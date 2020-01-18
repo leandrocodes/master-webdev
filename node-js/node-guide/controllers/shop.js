@@ -19,6 +19,7 @@ exports.getIndexShop = (req, res, next) => {
 
 exports.getProductById = (req, res, next) => {
   const prodId = req.params.productId
+  // TODO: Ler sobre o método findAll passndo o where
   Product.findByPk(prodId)
     .then((product) =>
       res.render('shop/product-detail', {
