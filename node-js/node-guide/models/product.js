@@ -10,7 +10,12 @@ module.exports = class Product {
     this.price = parseFloat(price)
   }
 
-  save() {}
+  save() {
+    return db.execute(
+      'INSERT INTO `products` (`title`, `price`, `desc`, `imgUrl`) VALUES (?, ?, ?, ?)',
+      [this.title, this.price, this.desc, this.imgUrl]
+    )
+  }
 
   static deleteById(id) {}
 

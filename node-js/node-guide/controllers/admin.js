@@ -34,7 +34,6 @@ exports.postDelProduct = (req, res, next) => {
   res.redirect('/admin/products')
 }
 
-
 exports.postAddProduct = (req, res, next) => {
   const dt = req.body
   const title = dt.title
@@ -42,12 +41,20 @@ exports.postAddProduct = (req, res, next) => {
   const imgUrl = dt.imgUrl
   const price = dt.price
   const product = new Product(null, title, imgUrl, desc, price)
-  product.save()
-  res.redirect('/admin/products')
+  product
+    .save()
+    .then(() => {
+      res.redirect('/')
+    })
+    .catch(err => console.log(err))
 }
 
 exports.getListProducts = (req, res, next) => {
-  Product.fetchAll((products) => {
-    res.render('admin/products', { prods: products, path: '/admin/products', editing: true })
+  Product.fetchAll(products => {
+    res.render('admin/products', {
+      prods: products,
+      path: '/admin/products',
+      editing: true
+    })
   })
 }
