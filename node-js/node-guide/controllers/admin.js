@@ -2,7 +2,9 @@ const Product = require('../models/product')
 
 //admin
 exports.getListProducts = (req, res, next) => {
-  Product.findAll()
+  // Product.findAll()
+  req.user
+    .getProducts()
     .then(products => {
       res.render('admin/products', {
         prods: products,
@@ -21,8 +23,11 @@ exports.getEditProduct = (req, res, next) => {
   if (!edit) return res.redirect('/')
 
   const prodId = req.params.productId
-  Product.findByPk(prodId)
-    .then(product => {
+  // Product.findByPk(prodId)
+  req.user
+    .getProducts({ where: { id: prodId } })
+    .then(products => {
+      const product = products[0]
       if (!product) return res.redirect('/')
       else
         res.render('admin/edit-product', {
@@ -40,12 +45,13 @@ exports.postAddProduct = (req, res, next) => {
   const desc = dt.desc
   const imgUrl = dt.imgUrl
   const price = dt.price
-  Product.create({
-    title,
-    price,
-    imgUrl,
-    desc
-  })
+  req.user
+    .createProduct({
+      title,
+      price,
+      imgUrl,
+      desc
+    })
     .then(() => {
       console.log('Produto Criado!')
       res.redirect('/')
