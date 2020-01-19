@@ -4,6 +4,28 @@ block title
   title Orders List
 
 block styles
+  link(rel="stylesheet", href="/css/product.css")
 
 block content
-  h1 Nothing there...
+  main
+    if (orders.length > 0)
+      .grid
+        ul
+          each order in orders
+            li
+              h1 #{order.id}
+            ul
+              each item in order.products
+                li
+                  p #{item.title} (x#{item.orderItem.quantity})
+          //- each order in orders
+            li
+              h1 #{order.id}
+              ul
+                each item in order.orderItem
+                  li
+                    p #{item.title} (x#{item.quantity})
+
+    else
+      h1 No orders yet!
+      
