@@ -1,6 +1,17 @@
 const Product = require('../models/product')
 
 //admin
+exports.getListProducts = (req, res, next) => {
+  Product.findAll()
+    .then(products => {
+      res.render('admin/products', {
+        prods: products,
+        path: '/admin/products'
+      })
+    })
+    .catch(err => console.log(err))
+}
+
 exports.getAddProduct = (req, res, next) => {
   res.render('admin/edit-product', { path: '/admin/add-product' })
 }
@@ -10,14 +21,17 @@ exports.getEditProduct = (req, res, next) => {
   if (!edit) return res.redirect('/')
 
   const prodId = req.params.productId
-  Product.findById(prodId, product => {
-    if (!product) return res.redirect('/')
-    res.render('admin/edit-product', {
-      path: '/admin/products',
-      edit,
-      product
+  Product.findByPk(prodId)
+    .then(product => {
+      if (!product) return res.redirect('/')
+      else
+        res.render('admin/edit-product', {
+          path: 'admin/edit-product',
+          edit,
+          product
+        })
     })
-  })
+    .catch()
 }
 
 exports.postAddProduct = (req, res, next) => {
@@ -55,15 +69,4 @@ exports.postDelProduct = (req, res, next) => {
   const prodId = req.body.productId
   Product.deleteById(prodId)
   res.redirect('/admin/products')
-}
-
-exports.getListProducts = (req, res, next) => {
-  Product.findAll()
-    .then(products => {
-      res.render('admin/products', {
-        prods: products,
-        path: '/admin/products'
-      })
-    })
-    .catch(err => console.log(err))
 }
