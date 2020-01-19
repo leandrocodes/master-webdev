@@ -61,8 +61,19 @@ exports.postEditProduct = (req, res, next) => {
   const updtPrice = dt.price
   const id = dt.prodId
   const product = new Product(id, updtTitle, updtImgUrl, updtDesc, updtPrice)
-  product.save()
-  res.redirect('/admin/products')
+  Product.findByPk(id)
+    .then(product => {
+      product.title = updtTitle
+      product.desc = updtDesc
+      product.imgUrl = updtImgUrl
+      product.price = updtPrice
+      return product.save()
+    })
+    .then(() => {
+      //console.log('updated')
+      res.redirect('/admin/products')
+    })
+    .catch(err => console.log(err))
 }
 
 exports.postDelProduct = (req, res, next) => {
