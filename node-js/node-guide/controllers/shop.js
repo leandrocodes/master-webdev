@@ -51,6 +51,7 @@ exports.postCartShop = (req, res, next) => {
   const prodId = req.body.productId
   let fetchedCart
   let newQuantity = 1
+  let totalprice = 0
   req.user
     .getCart()
     .then(cart => {
@@ -67,12 +68,12 @@ exports.postCartShop = (req, res, next) => {
         newQuantity += oldQty
         return product
       }
-
+      totalprice += product.price * newQuantity
       return Product.findByPk(prodId)
     })
     .then(product => {
       return fetchedCart.addProduct(product, {
-        through: { quantity: newQuantity }
+        through: { quantity: newQuantity, totalPrice: totalprice }
       })
     })
     .then(() => {
