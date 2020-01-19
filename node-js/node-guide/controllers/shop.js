@@ -1,5 +1,4 @@
 const Product = require('../models/product')
-const Cart = require('../models/cart')
 //shop
 exports.getProductsShop = (req, res, next) => {
   Product.findAll()
@@ -51,7 +50,6 @@ exports.postCartShop = (req, res, next) => {
   const prodId = req.body.productId
   let fetchedCart
   let newQuantity = 1
-  let totalprice = 0
   req.user
     .getCart()
     .then(cart => {
@@ -68,12 +66,11 @@ exports.postCartShop = (req, res, next) => {
         newQuantity += oldQty
         return product
       }
-      totalprice += product.price * newQuantity
       return Product.findByPk(prodId)
     })
     .then(product => {
       return fetchedCart.addProduct(product, {
-        through: { quantity: newQuantity, totalPrice: totalprice }
+        through: { quantity: newQuantity }
       })
     })
     .then(() => {
@@ -110,4 +107,34 @@ exports.getCheckoutShop = (req, res, next) => {
 
 exports.getOrdersShop = (req, res, next) => {
   res.render('shop/orders', { path: '/orders' })
+}
+
+exports.postOrdersShop = (req, res, next) => {
+  let fetchedCart
+  req.user
+    .getCart()
+    .then(cart => {
+      fetchedCart = cart
+      return cart.getProducts()
+    })
+    .then(products => {
+      return req.user
+        .createOrder()
+        .then(order => {
+          order.addProducts(products.map(product => {
+            product.orderItem = { quantity: product.cartItem.quantity }
+            return product
+          }))
+        })
+        .catch(err => console.log(err))
+      // console.log(products)
+    })
+    .then(result => {
+      fetchedCart.setProducts(null)
+      //res.redirect('/orders')
+    })
+    .then(result => {
+      res.redirect('/orders')
+    })
+    .catch(err => console.log(err))
 }
