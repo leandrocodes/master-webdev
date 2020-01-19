@@ -21,7 +21,7 @@ exports.getProductById = (req, res, next) => {
   const prodId = req.params.productId
   // TODO: Ler sobre o método findAll passndo o where
   Product.findByPk(prodId)
-    .then((product) =>
+    .then(product =>
       res.render('shop/product-detail', {
         product: product,
         path: '/products'
@@ -31,32 +31,54 @@ exports.getProductById = (req, res, next) => {
 }
 
 exports.getCartShop = (req, res, next) => {
-  Cart.getCart(cart => {
-    Product.fetchAll(products => {
-      const cartProducts = []
-      const totalPrice = cart.totalPrice
-      for (product of products) {
-        const productData = cart.products.find(prod => prod.id === product.id)
-        if (productData) {
-          cartProducts.push({ productData: product, qty: productData.qty })
-        }
-      }
-      res.render('shop/cart', {
-        path: '/cart',
-        products: cartProducts,
-        totalPrice
-      })
-      console.log(cartProducts)
+  req.user
+    .getCart()
+    .then(cart => {
+      return cart
+        .getProducts()
+        .then(products => {
+          res.render('shop/cart', {
+            path: '/cart',
+            products
+          })
+        })
+        .catch(err => console.log(err))
     })
-  })
+    .catch(err => console.log(err))
 }
 
 exports.postCartShop = (req, res, next) => {
   const prodId = req.body.productId
-  Product.findById(prodId, product => {
-    Cart.addProduct(prodId, product.price)
-  })
-  res.redirect('/cart')
+  let fetchedCart
+  let newQuantity = 1
+  req.user
+    .getCart()
+    .then(cart => {
+      fetchedCart = cart
+      return cart.getProducts({ where: { id: prodId } })
+    })
+    .then(products => {
+      let product
+
+      if (products.length > 0) product = products[0]
+      
+      if (product) {
+        const oldQty = product.cartItem.quantity
+        newQuantity += oldQty
+        return product
+      }
+
+      return Product.findByPk(prodId)
+    })
+    .then(product => {
+      return fetchedCart.addProduct(product, {
+        through: { quantity: newQuantity }
+      })
+    })
+    .then(() => {
+      res.redirect('/cart')
+    })
+    .catch(err => console.log(err))
 }
 
 exports.postCartDeleteItem = (req, res, next) => {

@@ -13,9 +13,9 @@ block content
           ul
             each item in products
               li 
-                p #{item.productData.title} (x#{item.qty})
+                p #{item.title} (x#{item.cartItem.quantity})
                 form(action="/cart-delete-item" method="post")
-                  input(type="hidden", name="productId", value=item.productData.id)
+                  input(type="hidden", name="productId", value=item.id)
                   button.btn(type="submit") Delete
             p Total Price: $ #{totalPrice}
 
